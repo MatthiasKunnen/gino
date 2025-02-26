@@ -32,6 +32,47 @@ overrides:
       project:
         - tsconfig.json
     rules:
+      '@typescript-eslint/naming-convention':
+        - error
+        - format:
+            - camelCase
+          selector: default
+        - format:
+            - camelCase
+            - PascalCase
+          selector: import
+        - format:
+            - PascalCase
+          selector: typeLike
+        - format:
+            - PascalCase
+          selector: enumMember
+        - format:
+            - camelCase
+          leadingUnderscore: allow
+          selector: method
+        - format:
+            - camelCase
+          leadingUnderscore: allow
+          selector: parameter
+        - format:
+            - camelCase
+            - PascalCase
+          leadingUnderscore: allow
+          selector: variable
+        - format:
+            - camelCase
+            - PascalCase
+            - UPPER_CASE
+          modifiers:
+            - const
+          selector: variable
+        - format:
+          selector: classProperty
+        - format:
+          selector: objectLiteralProperty
+        - format:
+          selector: typeProperty
       '@typescript-eslint/no-var-requires': off
       indent:
         - error

@@ -1,9 +1,11 @@
 <script lang="ts">
 	import {afterNavigate} from '$app/navigation';
 	import type {Snapshot} from '@sveltejs/kit';
+	import {onMount} from 'svelte';
 
 	import './normalize.css';
 	import './global.css';
+	import {initStorage} from '$lib/storage.svelte';
 
 	let rootContent: HTMLElement;
 	let mobileNavOpen = false;
@@ -30,12 +32,14 @@
 			rootContent.scrollTop = value;
 		},
 	};
+
+	onMount(() => {
+		// Initialize state once at application startup
+		initStorage();
+	});
 </script>
 
 <div class="body" class:mobileNavOpen>
-	<header>
-		Edit
-	</header>
 	<div class="root-content" bind:this={rootContent}>
 		<slot></slot>
 	</div>
