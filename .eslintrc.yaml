@@ -1,0 +1,56 @@
+---
+
+env:
+  es6: true
+
+ignorePatterns:
+  - '*.svelte'
+
+overrides:
+  -
+    files:
+      - '*.js'
+    env:
+      node: true
+    parserOptions:
+      ecmaVersion: 2023
+      sourceType: module
+    extends:
+      - '@matthiaskunnen/eslint-config-base'
+    rules:
+      indent:
+        - error
+        - tab
+      no-tabs: off
+
+  -
+    files:
+      - 'src/**/*.ts'
+    extends:
+      - '@matthiaskunnen/eslint-config-typescript'
+    parserOptions:
+      project:
+        - tsconfig.json
+    rules:
+      '@typescript-eslint/no-var-requires': off
+      indent:
+        - error
+        - tab
+      no-console: off
+      no-tabs: off
+
+  -
+    files:
+      - vite.config.ts
+    env:
+      node: true
+    extends:
+      - '@matthiaskunnen/eslint-config-typescript'
+    parserOptions:
+      project:
+        - tsconfig.json
+    rules:
+      indent:
+        - error
+        - tab
+      no-tabs: off
