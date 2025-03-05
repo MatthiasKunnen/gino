@@ -37,6 +37,32 @@
 		// Initialize state once at application startup
 		initStorage();
 	});
+
+	onMount(() => {
+		const buttonClickHandler = (event: MouseEvent) => {
+			const target = (event.target as HTMLElement | null)?.closest('button');
+			if (target == null) {
+				return;
+			}
+
+			target.animate(
+				[
+					{backgroundColor: 'var(--button-click-color)'},
+					{}, // Animate back to the original background color
+				],
+				{
+					duration: 300,
+					easing: 'ease-in-out',
+				},
+			);
+		};
+
+		document.body.addEventListener('click', buttonClickHandler);
+
+		return () => {
+			document.body.removeEventListener('click', buttonClickHandler);
+		};
+	});
 </script>
 
 <div class="body" class:mobileNavOpen>

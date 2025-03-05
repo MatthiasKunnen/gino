@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {getItems} from '$lib/storage.svelte';
 	import Decimal from 'big.js';
-	import {onDestroy, onMount} from 'svelte';
 
 	type Item = {cost: Decimal, amount: number}
 	const items = $state<Array<Item>>([]);
@@ -28,32 +27,6 @@
 			item.amount = 0;
 		}
 	};
-
-	const buttonClickHandler = (event: MouseEvent) => {
-		const target = (event.target as HTMLElement | null)?.closest('button');
-		if (target == null) {
-			return;
-		}
-
-		target.animate(
-			[
-				{backgroundColor: 'var(--button-click-color)'},
-				{}, // Animate back to the original background color
-			],
-			{
-				duration: 300,
-				easing: 'ease-in-out',
-			},
-		);
-	};
-
-	onMount(() => {
-		document.body.addEventListener('click', buttonClickHandler);
-
-		return () => {
-			document.body.removeEventListener('click', buttonClickHandler);
-		};
-	});
 </script>
 <div class="container">
 	<div class="items">
