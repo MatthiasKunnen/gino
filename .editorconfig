@@ -14,6 +14,6 @@ indent_style = space
 max_line_length = off
 trim_trailing_whitespace = false
 
-[*.yaml]
+[*.{yaml,yml}]
 indent_size = 2
 indent_style = space
