@@ -1,9 +1,22 @@
 <script lang="ts">
 	import {getItems} from '$lib/storage.svelte';
 	import Decimal from 'big.js';
+	import {untrack} from 'svelte';
 
 	type Item = {cost: Decimal, amount: number}
 	const items = $state<Array<Item>>([]);
+	$effect(() => {
+		const update = getItems();
+		untrack(() => {
+			items.length = 0;
+			for (let item of update) {
+				items.push({
+					cost: item.cost,
+					amount: 0,
+				});
+			}
+		});
+	});
 	for (let item of getItems()) {
 		items.push({
 			cost: item.cost,
@@ -57,9 +70,9 @@
 		{/each}
 	</ul>
 	<div class="flex-grow"></div>
-	<button class="edit-prices">
+	<a class="edit-prices" href="/edit">
 		Edit prices
-	</button>
+	</a>
 </div>
 
 <style lang="scss">

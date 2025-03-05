@@ -13,6 +13,7 @@ export function initStorage() {
 	loadStorage();
 
 	$effect(() => {
+		$inspect('Updates to items', items);
 		localStorage.setItem('items', JSON.stringify(items));
 	});
 }
@@ -57,4 +58,8 @@ function loadStorage() {
 
 export function getItems(): Array<Item> {
 	return items;
+}
+
+export function setItems(i: Array<Item>) {
+	items = i;
 }
