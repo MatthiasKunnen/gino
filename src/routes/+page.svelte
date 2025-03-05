@@ -53,8 +53,8 @@
 	</div>
 
 	<div class="total">
-		<p>Total: {total}</p>
-		<button class="clear" onclick="{clear}">Clear</button>
+		<p>Totaal: € {total}</p>
+		<button class="clear" onclick="{clear}">Wis</button>
 	</div>
 
 	<ul class="cart">
@@ -63,7 +63,7 @@
 				<li class="cart-item">
 					€ {item.cost} × {item.amount} = € {item.cost.times(item.amount)}
 					<button onclick={() => decrease(item)}>
-						min 1
+						-1
 					</button>
 				</li>
 			{/if}
@@ -71,7 +71,7 @@
 	</ul>
 	<div class="flex-grow"></div>
 	<a class="edit-prices" href="/edit">
-		Edit prices
+		Wijzig prijzen
 	</a>
 </div>
 
