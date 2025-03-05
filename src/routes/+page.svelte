@@ -62,7 +62,7 @@
 			{#if item.amount > 0}
 				<li class="cart-item">
 					€ {item.cost} × {item.amount} = € {item.cost.times(item.amount)}
-					<button onclick={() => decrease(item)}>
+					<button class="decrease" onclick={() => decrease(item)}>
 						-1
 					</button>
 				</li>
@@ -122,7 +122,12 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin: 0.5em 0
+			margin: 0.5em 0;
+
+			.decrease {
+				// Increase touch target on mobile
+				min-width: 60px;
+			}
 		}
 	}
 
