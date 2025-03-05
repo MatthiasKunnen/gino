@@ -98,14 +98,14 @@
 		gap: 1em;
 		margin: 1em 0;
 
-		@media (max-width: 599px) {
+		@media (max-width: 699px) {
 			grid-template-columns: repeat(3, auto);
 			input {
 				grid-column: 1 / -1;
 			}
 		}
 
-		@media (max-width: 399px) {
+		@media (max-width: 499px) {
 			grid-template-columns: 1fr;
 
 			.empty {
