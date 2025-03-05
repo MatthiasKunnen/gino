@@ -5,6 +5,7 @@ on:
   - workflow_dispatch
 
 permissions:
+  contents: read
   packages: write
 
 jobs:
@@ -12,7 +13,7 @@ jobs:
     name: Website Docker image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v3.5.1
         with:
@@ -23,7 +24,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       - name: Cache Yarn packages
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v4
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
