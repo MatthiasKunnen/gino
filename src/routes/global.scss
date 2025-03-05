@@ -67,4 +67,21 @@ a, button {
 			background-color: #f4f4f4;
 		}
 	}
+
+	&.danger {
+		border-color: #8a0202;
+		background-color: #d50e0e;
+		color: white;
+		--button-click-color: #c15c5c;
+
+		@media (hover: hover) {
+			&:focus, &:hover {
+				background-color: #ba4545;
+			}
+		}
+	}
+
+	&.accent {
+		background-color: rgb(182 216 252);
+	}
 }

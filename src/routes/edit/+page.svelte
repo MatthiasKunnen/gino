@@ -70,24 +70,24 @@
 		setItems(items);
 	}
 </script>
-<a href="/">Keer terug</a>
+<a href="/" class="accent">Keer terug</a>
 <div class="prices">
 	{#each items as item, i}
 		<input type="number" onchange="{e => updatePrice(i, e)}" value={item.cost} min="1" step="0.01"/>
 		{#if i > 0}
-			<button onclick="{() => moveUp(i)}">Naar boven</button>
+			<button onclick="{() => moveUp(i)}">↑Naar boven</button>
 		{:else}
-			<span></span>
+			<span class="empty"></span>
 		{/if}
 		{#if i < items.length - 1}
-			<button onclick="{() => moveDown(i)}">Naar beneden</button>
+			<button onclick="{() => moveDown(i)}">↓Naar beneden</button>
 		{:else}
-			<span></span>
+			<span class="empty"></span>
 		{/if}
-		<button onclick="{() => remove(i)}">Verwijder</button>
+		<button class="danger" onclick="{() => remove(i)}">Verwijder</button>
 	{/each}
 </div>
-<button onclick="{addItem}">
+<button class="accent" onclick="{addItem}">
 	Voeg toe
 </button>
 
@@ -97,5 +97,20 @@
 		grid-template-columns: 1fr auto auto auto;
 		gap: 1em;
 		margin: 1em 0;
+
+		@media (max-width: 599px) {
+			grid-template-columns: repeat(3, auto);
+			input {
+				grid-column: 1 / -1;
+			}
+		}
+
+		@media (max-width: 399px) {
+			grid-template-columns: 1fr;
+
+			.empty {
+				display: none;
+			}
+		}
 	}
 </style>
