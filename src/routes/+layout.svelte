@@ -4,7 +4,7 @@
 	import {onMount} from 'svelte';
 
 	import './normalize.css';
-	import './global.css';
+	import './global.scss';
 	import {initStorage} from '$lib/storage.svelte';
 
 	let rootContent: HTMLElement;

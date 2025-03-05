@@ -7,6 +7,7 @@ html {
 body {
 	height: 100%;
 	--accent-color: #388edb;
+	--button-click-color: #e0e0e0;
 }
 
 h1, h2, h3 {
@@ -54,4 +55,16 @@ ul.list {
 	display: block;
 	height: 1em;
 	width: auto;
+}
+
+a, button {
+	border: 2px solid black;
+	border-radius: 4px;
+	padding: 0.25em 0.5em;
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: #f4f4f4;
+		}
+	}
 }

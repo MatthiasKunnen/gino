@@ -91,25 +91,12 @@
 
 <style lang="scss">
 	.container {
-		--button-click-color: #e0e0e0;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 
 		@media (max-width: 999px) {
 			flex-direction: column-reverse;
-		}
-	}
-
-	button {
-		border: 2px solid black;
-		border-radius: 4px;
-		padding: 0.25em 0.5em;
-
-		@media (hover: hover) {
-			&:hover {
-				background-color: #f4f4f4;
-			}
 		}
 	}
 
