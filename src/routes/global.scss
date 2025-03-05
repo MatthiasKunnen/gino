@@ -62,12 +62,8 @@ a, button {
 	border-radius: 4px;
 	padding: 0.25em 0.5em;
 
-	&:focus {
-		background-color: #f4f4f4;
-	}
-
 	@media (hover: hover) {
-		&:hover {
+		&:focus, &:hover {
 			background-color: #f4f4f4;
 		}
 	}
