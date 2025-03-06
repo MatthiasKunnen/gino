@@ -16,24 +16,33 @@
 		}
 
 		const swapIndex = index + 1;
-
-		if (items[index] !== undefined && items[swapIndex] !== undefined) {
-			[items[index], items[swapIndex]] = [items[swapIndex], items[index]];
-			items = items
-			setItems(items);
+		const origin = items[index];
+		const destination = items[swapIndex];
+		if (origin == null || destination == null) {
+			return;
 		}
+
+		items[index] = destination;
+		items[swapIndex] = origin;
+		setItems(items);
 	}
 
 	function moveUp(index: number) {
 		if (index <= 0) {
 			return;
 		}
-		const swapIndex = index - 1;
 
-		if (items[index] !== undefined && items[swapIndex] !== undefined) {
-			[items[index], items[swapIndex]] = [items[swapIndex], items[index]];
-			setItems(items);
+		const swapIndex = index - 1;
+		const origin = items[index];
+		const destination = items[swapIndex];
+		if (origin == null || destination == null) {
+			return;
 		}
+
+		items[index] = destination;
+		items[swapIndex] = origin;
+		setItems(items);
+
 	}
 
 	function remove(index: number) {
@@ -61,12 +70,13 @@
 			return;
 		}
 
-		if (items[index] === undefined) {
+		const item = items[index];
+		if (item === undefined) {
 			console.error(`Index ${index} is outside items' bounds.`)
 			return;
 		}
 
-		items[index].cost = newValue
+		item.cost = newValue;
 		setItems(items);
 	}
 </script>

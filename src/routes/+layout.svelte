@@ -87,16 +87,6 @@
 		scrollbar-gutter: stable both-edges;
 	}
 
-	header {
-		position: relative;
-		z-index: 50;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 4px 8px;
-		background-color: var(--accent-color);
-	}
-
 	@media (max-width: 599px) {
 
 		.body {
