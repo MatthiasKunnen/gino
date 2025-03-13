@@ -61,6 +61,7 @@ a, button {
 	border: 0.0625em solid black;
 	border-radius: 4px;
 	padding: 0.25em 0.5em;
+	touch-action: manipulation;
 
 	@media (hover: hover) {
 		&:focus, &:hover {
