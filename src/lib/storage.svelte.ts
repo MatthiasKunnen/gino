@@ -2,23 +2,18 @@ import Decimal from 'big.js';
 
 import type {Item} from '$lib/data.interface';
 
-let items = $state<Array<Item>>([
+let isInitialized = false;
+let items: Array<Item> = [
 	{cost: Decimal('2.7')},
 	{cost: Decimal('3')},
 	{cost: Decimal('4.5')},
 	{cost: Decimal('7.5')},
-]);
-
-export function initStorage() {
-	loadStorage();
-
-	$effect(() => {
-		$inspect('Updates to items', items);
-		localStorage.setItem('items', JSON.stringify(items));
-	});
-}
+];
 
 function loadStorage() {
+	if (isInitialized) {
+		return;
+	}
 	const itemsStorageVal = localStorage.getItem('items');
 	if (itemsStorageVal === null) {
 		return;
@@ -54,12 +49,15 @@ function loadStorage() {
 	}
 
 	items = array as Array<Item>;
+	isInitialized = true;
 }
 
 export function getItems(): Array<Item> {
-	return items;
+	loadStorage();
+	return [...items];
 }
 
 export function setItems(i: Array<Item>) {
-	items = i;
+	items = [...i];
+	localStorage.setItem('items', JSON.stringify(items));
 }

@@ -1,36 +1,18 @@
 <script lang="ts">
 	import {getItems} from '$lib/storage.svelte';
 	import Decimal from 'big.js';
-	import {untrack} from 'svelte';
+	import {onMount} from 'svelte';
 
-	type Item = {cost: Decimal, amount: number}
-	const items = $state<Array<Item>>([]);
-	$effect(() => {
-		const update = getItems();
-		untrack(() => {
-			items.length = 0;
-			for (let item of update) {
-				items.push({
-					cost: item.cost,
-					amount: 0,
-				});
-			}
-		});
-	});
-	for (let item of getItems()) {
-		items.push({
-			cost: item.cost,
-			amount: 0,
-		});
-	}
+	type CartItem = {cost: Decimal, amount: number}
+	const items = $state<Array<CartItem>>([]);
 
 	let total = $state(new Decimal(0));
 
-	const add = (val: Item) => {
+	const add = (val: CartItem) => {
 		val.amount++;
 		total = total.plus(val.cost);
 	};
-	const decrease = (val: Item) => {
+	const decrease = (val: CartItem) => {
 		val.amount--;
 		total = total.minus(val.cost);
 	};
@@ -40,6 +22,16 @@
 			item.amount = 0;
 		}
 	};
+
+	onMount(() => {
+		items.length = 0;
+		for (let item of getItems()) {
+			items.push({
+				cost: item.cost,
+				amount: 0,
+			});
+		}
+	})
 </script>
 <div class="container">
 	<div class="items">

@@ -1,13 +1,16 @@
 <script lang="ts">
 	import {getItems, setItems} from '$lib/storage.svelte';
 	import Decimal from 'big.js';
+	import type {Item} from "$lib/data.interface";
+	import {onMount} from "svelte";
 
-	let items = getItems();
+	let items = $state<Array<Item>>([]);
 
 	function addItem(): void {
 		items.push({
 			cost: new Decimal(0),
 		});
+		setItems(items)
 	}
 
 	function moveDown(index: number) {
@@ -79,6 +82,10 @@
 		item.cost = newValue;
 		setItems(items);
 	}
+
+	onMount(() => {
+		items = getItems()
+	})
 </script>
 <a href="/" class="accent">Keer terug</a>
 <div class="prices">

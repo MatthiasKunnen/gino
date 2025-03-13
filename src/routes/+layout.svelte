@@ -5,7 +5,6 @@
 
 	import './normalize.css';
 	import './global.scss';
-	import {initStorage} from '$lib/storage.svelte';
 
 	let rootContent: HTMLElement;
 	let mobileNavOpen = false;
@@ -32,11 +31,6 @@
 			rootContent.scrollTop = value;
 		},
 	};
-
-	onMount(() => {
-		// Initialize state once at application startup
-		initStorage();
-	});
 
 	onMount(() => {
 		const buttonClickHandler = (event: MouseEvent) => {
