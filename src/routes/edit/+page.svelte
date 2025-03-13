@@ -54,7 +54,7 @@
 		}
 
 		if (items[index] !== undefined) {
-			delete items[index];
+			items.splice(index, 1);
 			setItems(items);
 		}
 	}
