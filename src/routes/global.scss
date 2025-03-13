@@ -83,6 +83,13 @@ a, button {
 	}
 
 	&.accent {
-		background-color: rgb(182 216 252);
+		background-color: #b6d8fc;
+		--button-click-color: #b5cae5;
+
+		@media (hover: hover) {
+			&:focus, &:hover {
+				background-color: #93c2ef;
+			}
+		}
 	}
 }
