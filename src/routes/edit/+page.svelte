@@ -14,7 +14,7 @@
 	}
 
 	function remove(index: number) {
-		if (index <= 0) {
+		if (index < 0) {
 			return;
 		}
 
