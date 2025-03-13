@@ -3,14 +3,28 @@
 	import Decimal from 'big.js';
 	import type {Item} from "$lib/data.interface";
 	import {onMount} from "svelte";
+	import PriceInputModal from "$lib/components/PriceInputModal.svelte";
 
 	let items = $state<Array<Item>>([]);
+	let showModal = $state(false);
 
-	function addItem(): void {
+	function addItem(value: string): void {
+		let decimalValue: Decimal;
+		try {
+			decimalValue = new Decimal(value);
+		} catch (error) {
+			console.error('Value could not be parsed as a decimal', error)
+			return;
+		}
+
 		items.push({
-			cost: new Decimal(0),
+			cost: decimalValue,
 		});
-		setItems(items)
+		setItems(items);
+	}
+
+	function showAddModal() {
+		showModal = true;
 	}
 
 	function remove(index: number) {
@@ -59,9 +73,15 @@
 		<button class="danger" onclick="{() => remove(i)}">Verwijder</button>
 	{/each}
 </div>
-<button class="accent" onclick="{addItem}">
+<button class="accent" onclick="{showAddModal}">
 	Voeg toe
 </button>
+
+<PriceInputModal bind:showModal valueOut={addItem} okButtonText="Voeg toe">
+	{#snippet header()}
+		<h2 class="price-modal-title">Voeg prijs toe</h2>
+	{/snippet}
+</PriceInputModal>
 
 <style lang="scss">
 	.prices {
@@ -73,5 +93,10 @@
 		@media (max-width: 499px) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
+	}
+
+	.price-modal-title {
+		text-align: center;
+		margin-top: 0.5em;
 	}
 </style>
