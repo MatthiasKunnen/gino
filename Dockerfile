@@ -1,4 +1,4 @@
-FROM georgjung/nginx-brotli@sha256:46b8f1eeee2df8e7ed61cd9be97b02d2d18d9af8defefe10bfe09c822bc01e2f
+FROM georgjung/nginx-brotli@sha256:5496e5664a0c1beaab8b1c0e16af42fa8cd8a9e592a63093beb911c0c6ca464f
 LABEL org.opencontainers.image.source=https://github.com/MatthiasKunnen/gino
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
