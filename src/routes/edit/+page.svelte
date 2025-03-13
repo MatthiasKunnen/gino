@@ -13,41 +13,6 @@
 		setItems(items)
 	}
 
-	function moveDown(index: number) {
-		if (index >= items.length - 1) {
-			return;
-		}
-
-		const swapIndex = index + 1;
-		const origin = items[index];
-		const destination = items[swapIndex];
-		if (origin == null || destination == null) {
-			return;
-		}
-
-		items[index] = destination;
-		items[swapIndex] = origin;
-		setItems(items);
-	}
-
-	function moveUp(index: number) {
-		if (index <= 0) {
-			return;
-		}
-
-		const swapIndex = index - 1;
-		const origin = items[index];
-		const destination = items[swapIndex];
-		if (origin == null || destination == null) {
-			return;
-		}
-
-		items[index] = destination;
-		items[swapIndex] = origin;
-		setItems(items);
-
-	}
-
 	function remove(index: number) {
 		if (index <= 0) {
 			return;
@@ -91,16 +56,6 @@
 <div class="prices">
 	{#each items as item, i}
 		<input type="number" onchange="{e => updatePrice(i, e)}" value={item.cost} min="1" step="0.01"/>
-		{#if i > 0}
-			<button onclick="{() => moveUp(i)}">↑Naar boven</button>
-		{:else}
-			<span class="empty"></span>
-		{/if}
-		{#if i < items.length - 1}
-			<button onclick="{() => moveDown(i)}">↓Naar beneden</button>
-		{:else}
-			<span class="empty"></span>
-		{/if}
 		<button class="danger" onclick="{() => remove(i)}">Verwijder</button>
 	{/each}
 </div>
@@ -111,23 +66,12 @@
 <style lang="scss">
 	.prices {
 		display: grid;
-		grid-template-columns: 1fr auto auto auto;
+		grid-template-columns: 1fr auto;
 		gap: 1em;
 		margin: 1em 0;
 
-		@media (max-width: 699px) {
-			grid-template-columns: repeat(3, auto);
-			input {
-				grid-column: 1 / -1;
-			}
-		}
-
 		@media (max-width: 499px) {
-			grid-template-columns: 1fr;
-
-			.empty {
-				display: none;
-			}
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 </style>

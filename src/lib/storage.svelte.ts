@@ -49,6 +49,7 @@ function loadStorage() {
 	}
 
 	items = array as Array<Item>;
+	sortItems();
 	isInitialized = true;
 }
 
@@ -59,5 +60,10 @@ export function getItems(): Array<Item> {
 
 export function setItems(i: Array<Item>) {
 	items = [...i];
+	sortItems();
 	localStorage.setItem('items', JSON.stringify(items));
+}
+
+function sortItems(): void {
+	items.sort((a, b) => a.cost.gt(b.cost) ? 1 : -1);
 }
