@@ -1,0 +1,17 @@
+services:
+  website:
+    cap_add:
+      - NET_ADMIN
+    image: ghcr.io/matthiaskunnen/gino/website:TAG_HERE
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - '12000:80'
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

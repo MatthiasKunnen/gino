@@ -10,7 +10,8 @@
 		"dev": "vite dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"preview": "vite preview",
-		"lint": "eslint \"src/**/*.ts\" \"svelte.config.js\" vite.config.ts"
+		"lint": "eslint \"src/**/*.ts\" \"svelte.config.js\" vite.config.ts",
+		"start:docker": "docker run -it -p 127.0.0.1:12000:80 -v caddy_data:/data -v caddy_config:/config $(docker buildx build . -q)"
 	},
 	"dependencies": {
 		"big.js": "6.2.2"
