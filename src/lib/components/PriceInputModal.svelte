@@ -76,6 +76,13 @@
 		}
 	}
 
+	form {
+
+		input {
+			width: 100%;
+		}
+	}
+
 	.actions {
 		display: flex;
 		flex-direction: row-reverse;

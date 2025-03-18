@@ -2,46 +2,84 @@
 	import {getItems} from '$lib/storage.svelte';
 	import Decimal from 'big.js';
 	import {onMount} from 'svelte';
+	import type {Item} from "$lib/data.interface";
+	import PriceInputModal from "$lib/components/PriceInputModal.svelte";
 
 	type CartItem = {cost: Decimal, amount: number}
-	const items = $state<Array<CartItem>>([]);
-
+	let items = $state<Array<Item>>([]);
+	const cart = $state<Array<CartItem>>([]);
 	let total = $state(new Decimal(0));
+	let showModal = $state(false);
 
-	const add = (val: CartItem) => {
-		val.amount++;
-		total = total.plus(val.cost);
+	const add = (decimal: Decimal) => {
+		let added = false;
+		for (const cartItem of cart) {
+			if (cartItem.cost.eq(decimal)) {
+				cartItem.amount++;
+				added = true;
+				break;
+			}
+		}
+
+		if (!added) {
+			cart.push({
+				amount: 1,
+				cost: decimal,
+			})
+		}
+
+		total = total.plus(decimal);
 	};
-	const decrease = (val: CartItem) => {
-		val.amount--;
-		total = total.minus(val.cost);
+	const addCustom = (value: string) => {
+		let decimalValue: Decimal;
+		try {
+			decimalValue = new Decimal(value);
+		} catch (error) {
+			console.error('Value could not be parsed as a decimal', error)
+			return;
+		}
+		add(decimalValue);
+	}
+	const decrease = (cartIndex: number) => {
+		const cartItem = cart[cartIndex];
+		if (cartItem === undefined) {
+			return;
+		}
+
+		cartItem.amount--;
+		if (cartItem.amount <= 0) {
+			cart.splice(cartIndex, 1);
+		}
+
+		total = total.minus(cartItem.cost);
 	};
 	const clear = () => {
 		total = new Decimal(0);
-		for (let item of items) {
-			item.amount = 0;
-		}
+		cart.length = 0;
 	};
+	function showAddModal() {
+		showModal = true;
+	}
 
 	onMount(() => {
-		items.length = 0;
-		for (let item of getItems()) {
-			items.push({
-				cost: item.cost,
-				amount: 0,
-			});
-		}
+		cart.length = 0;
+		items = getItems();
 	})
 </script>
 <div class="container">
 	<div class="items">
-		{#each items as item}
+		{#each items as item (item.cost)}
 			<div class="item">
-				<button onclick={() => add(item)}>
+				<button onclick={() => add(item.cost)}>
 					€ {item.cost}
 				</button>
 			</div>
 		{/each}
+		<div class="item">
+			<button onclick={() => showAddModal()}>
+				Aangepast
+			</button>
+		</div>
 	</div>
 
 	<div class="total">
@@ -50,15 +88,13 @@
 	</div>
 
 	<ul class="cart">
-		{#each items as item}
-			{#if item.amount > 0}
-				<li class="cart-item">
-					€ {item.cost} × {item.amount} = € {item.cost.times(item.amount)}
-					<button class="decrease" onclick={() => decrease(item)}>
-						-1
-					</button>
-				</li>
-			{/if}
+		{#each cart as item, i (item.cost)}
+			<li class="cart-item">
+				€ {item.cost} × {item.amount} = € {item.cost.times(item.amount)}
+				<button class="decrease" onclick={() => decrease(i)}>
+					-1
+				</button>
+			</li>
 		{/each}
 	</ul>
 	<div class="flex-grow"></div>
@@ -66,6 +102,11 @@
 		Wijzig prijzen
 	</a>
 </div>
+<PriceInputModal bind:showModal valueOut={addCustom} okButtonText="Voeg toe">
+	{#snippet header()}
+		<h2 class="price-modal-title">Voeg aangepaste prijs toe</h2>
+	{/snippet}
+</PriceInputModal>
 
 <style lang="scss">
 	.container {
