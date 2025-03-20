@@ -113,6 +113,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		font-size: clamp(1rem, 7vw, 2rem);
 
 		@media (max-width: 999px) {
 			flex-direction: column-reverse;
@@ -122,14 +123,13 @@
 	.items {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		margin: 1em 0;
-		gap: 1em;
+		margin: 0.5em 0;
+		gap: 0.5em;
 
 		.item {
 			display: flex;
 			flex-direction: column;
 			justify-content: stretch;
-			font-size: 2rem;
 		}
 	}
 
@@ -138,7 +138,6 @@
 		flex-direction: column;
 		align-items: stretch;
 		text-align: center;
-		font-size: 2rem;
 	}
 
 	.clear {
@@ -149,7 +148,7 @@
 		margin: 0.5em 0;
 		list-style-type: disc;
 		list-style-position: inside;
-		font-size: 1.2rem;
+		font-size: 0.7em;
 
 		.cart-item {
 			display: flex;
@@ -170,5 +169,6 @@
 
 	.edit-prices {
 		align-self: flex-end;
+		font-size: 0.8em;
 	}
 </style>
