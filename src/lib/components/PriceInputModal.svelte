@@ -48,7 +48,7 @@
 >
 	{@render header?.()}
 	<form onsubmit={e => close(false)} id="price-input-form">
-		<input type="number" bind:value={value} min="1" step="0.01" required/>
+		<input type="number" inputmode="decimal" bind:value={value} min="1" step="0.01" required/>
 	</form>
 	<div class="actions">
 		<button class="accent" type="submit" form="price-input-form">{okButtonText}</button>
