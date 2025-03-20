@@ -95,10 +95,8 @@
 		</div>
 	</div>
 
-	<div class="total">
-		<p>Totaal: € {total}</p>
-		<button class="clear" onclick="{clear}">Wis</button>
-	</div>
+	<button class="clear" onclick="{clear}">Wis</button>
+	<p class="total">Totaal: € {total}</p>
 
 	<ul class="cart">
 		{#each cart as item, i (item.cost)}
@@ -147,14 +145,7 @@
 	}
 
 	.total {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
 		text-align: center;
-	}
-
-	.clear {
-		display: block;
 	}
 
 	.cart {
