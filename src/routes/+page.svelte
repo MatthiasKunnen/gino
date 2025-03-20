@@ -10,6 +10,7 @@
 	const cart = $state<Array<CartItem>>([]);
 	let total = $state(new Decimal(0));
 	let showModal = $state(false);
+	let scrollContainer: HTMLElement | null = null;
 
 	const add = (decimal: Decimal) => {
 		let added = false;
@@ -29,6 +30,17 @@
 		}
 
 		total = total.plus(decimal);
+
+		if (scrollContainer !== null) {
+			const s = scrollContainer
+			const isScrolledToBottom = s.scrollHeight - s.clientHeight <= s.scrollTop + 1
+
+			if (isScrolledToBottom) {
+				setTimeout(() => {
+					s.scrollTop = s.scrollHeight - s.clientHeight
+				})
+			}
+		}
 	};
 	const addCustom = (value: string) => {
 		let decimalValue: Decimal;
@@ -64,6 +76,7 @@
 	onMount(() => {
 		cart.length = 0;
 		items = getItems();
+		scrollContainer = document.getElementById('root-content');
 	})
 </script>
 <div class="container">
