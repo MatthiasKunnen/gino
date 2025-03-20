@@ -60,7 +60,7 @@
 </script>
 
 <div class="body" class:mobileNavOpen>
-	<div class="root-content" bind:this={rootContent}>
+	<div id="root-content" bind:this={rootContent}>
 		<slot></slot>
 	</div>
 </div>
@@ -72,7 +72,7 @@
 		height: 100%;
 	}
 
-	.root-content {
+	#root-content {
 		display: flex;
 		flex-direction: column;
 		padding: 16px;
