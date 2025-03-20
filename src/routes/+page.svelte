@@ -127,6 +127,7 @@
 		flex-direction: column;
 		flex-grow: 1;
 		font-size: clamp(1rem, 7vw, 2rem);
+		gap: 0.5em;
 
 		@media (max-width: 999px) {
 			flex-direction: column-reverse;
@@ -136,7 +137,6 @@
 	.items {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		margin: 0.5em 0;
 		gap: 0.5em;
 
 		.item {
